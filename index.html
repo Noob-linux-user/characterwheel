@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Multi-Wheel Character Generator</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>Multi-Wheel Character Generator</h1>
+  <p>Class → Subclass → Ability → Special → Weapon → Stats → Final Summary</p>
+</header>
+
+<main>
+  <div class="col wheels-grid">
+    <!-- Class wheel -->
+    <div class="wheel-card">
+      <h3>Class</h3>
+      <div class="wheel-container">
+        <div class="wheel-wrap" id="wrap-class">
+          <canvas id="canvas-class" width="360" height="360"></canvas>
+        </div>
+        <div class="pointer">▼</div>
+      </div>
+      <button id="spin-class">Spin Class</button>
+      <div class="result" id="result-class">—</div>
+    </div>
+
+    <!-- Subclass wheel -->
+    <div class="wheel-card">
+      <h3>Subclass</h3>
+      <div class="wheel-container">
+        <div class="wheel-wrap" id="wrap-subclass">
+          <canvas id="canvas-subclass" width="360" height="360"></canvas>
+        </div>
+        <div class="pointer">▼</div>
+      </div>
+      <button id="spin-subclass" disabled>Spin Subclass</button>
+      <div class="result" id="result-subclass">—</div>
+    </div>
+
+    <!-- Ability wheel -->
+    <div class="wheel-card">
+      <h3>Ability</h3>
+      <div class="wheel-container">
+        <div class="wheel-wrap" id="wrap-ability">
+          <canvas id="canvas-ability" width="360" height="360"></canvas>
+        </div>
+        <div class="pointer">▼</div>
+      </div>
+      <button id="spin-ability" disabled>Spin Ability</button>
+      <div class="result" id="result-ability">—</div>
+    </div>
+
+    <!-- Special wheel -->
+    <div class="wheel-card">
+      <h3>Special (25% chance None)</h3>
+      <div class="wheel-container">
+        <div class="wheel-wrap" id="wrap-special">
+          <canvas id="canvas-special" width="360" height="360"></canvas>
+        </div>
+        <div class="pointer">▼</div>
+      </div>
+      <button id="spin-special">Spin Special</button>
+      <div class="result" id="result-special">—</div>
+    </div>
+
+    <!-- Weapon wheel -->
+    <div class="wheel-card">
+      <h3>Weapon (25% chance None)</h3>
+      <div class="wheel-container">
+        <div class="wheel-wrap" id="wrap-weapon">
+          <canvas id="canvas-weapon" width="360" height="360"></canvas>
+        </div>
+        <div class="pointer">▼</div>
+      </div>
+      <button id="spin-weapon">Spin Weapon</button>
+      <div class="result" id="result-weapon">—</div>
+    </div>
+
+    <!-- Stats group -->
+    <div class="wheel-card">
+      <h3>Stats (each 7 tiers)</h3>
+
+      <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+        <div style="width:180px; text-align:center; margin-bottom:10px;">
+          <div style="font-weight:700">Strength</div>
+          <div class="stat-wheel-container">
+            <div class="stat-wheel-wrap" id="wrap-strength">
+              <canvas id="canvas-strength" width="160" height="160"></canvas>
+            </div>
+            <div class="stat-pointer">▼</div>
+          </div>
+          <button id="spin-strength">Spin</button>
+          <div class="result" id="result-strength">—</div>
+        </div>
+
+        <div style="width:180px; text-align:center; margin-bottom:10px;">
+          <div style="font-weight:700">Speed</div>
+          <div class="stat-wheel-container">
+            <div class="stat-wheel-wrap" id="wrap-speed">
+              <canvas id="canvas-speed" width="160" height="160"></canvas>
+            </div>
+            <div class="stat-pointer">▼</div>
+          </div>
+          <button id="spin-speed">Spin</button>
+          <div class="result" id="result-speed">—</div>
+        </div>
+
+        <div style="width:180px; text-align:center; margin-bottom:10px;">
+          <div style="font-weight:700">Durability</div>
+          <div class="stat-wheel-container">
+            <div class="stat-wheel-wrap" id="wrap-durability">
+              <canvas id="canvas-durability" width="160" height="160"></canvas>
+            </div>
+            <div class="stat-pointer">▼</div>
+          </div>
+          <button id="spin-durability">Spin</button>
+          <div class="result" id="result-durability">—</div>
+        </div>
+
+        <div style="width:180px; text-align:center; margin-bottom:10px;">
+          <div style="font-weight:700">Intelligence</div>
+          <div class="stat-wheel-container">
+            <div class="stat-wheel-wrap" id="wrap-intelligence">
+              <canvas id="canvas-intelligence" width="160" height="160"></canvas>
+            </div>
+            <div class="stat-pointer">▼</div>
+          </div>
+          <button id="spin-intelligence">Spin</button>
+          <div class="result" id="result-intelligence">—</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- right: final summary & controls -->
+  <div class="col right" style="padding:14px;">
+    <h3>Summary Card</h3>
+    <div id="card" style="background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent); padding:12px; border-radius:10px;">
+      <div class="card-row"><div><strong>Class</strong></div><div id="card-class">—</div></div>
+      <div class="card-row"><div><strong>Subclass</strong></div><div id="card-subclass">—</div></div>
+      <div class="card-row"><div><strong>Ability</strong></div><div id="card-ability">—</div></div>
+      <div class="card-row"><div><strong>Special</strong></div><div id="card-special">—</div></div>
+      <div class="card-row"><div><strong>Weapon</strong></div><div id="card-weapon">—</div></div>
+      <div style="height:8px"></div>
+      <div class="card-row"><div><strong>Strength</strong></div><div id="card-strength">—</div></div>
+      <div class="card-row"><div><strong>Speed</strong></div><div id="card-speed">—</div></div>
+      <div class="card-row"><div><strong>Durability</strong></div><div id="card-durability">—</div></div>
+      <div class="card-row"><div><strong>Intelligence</strong></div><div id="card-intelligence">—</div></div>
+
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:space-between;">
+        <button id="spin-all">Spin All</button>
+        <button id="download-card">Download Card</button>
+      </div>
+
+      <div style="margin-top:10px; color:var(--muted); font-size:13px;">Tip: spin in order or use "Spin All".</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <small style="color:var(--muted)">ooga booga meg.</small>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
